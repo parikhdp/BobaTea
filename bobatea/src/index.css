@@ -1,13 +1,166 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+               "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+}
+
+/* DESKTOP BACKGROUND */
+
+.app-wrapper {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 80px 20px;
+  overflow: hidden;
+  background: #f6dcff;
+}
+
+/* FAST LIQUID BLOBS (DESKTOP ONLY) */
+
+@media (min-width: 501px) {
+
+  .app-wrapper::before,
+  .app-wrapper::after,
+  .blob {
+    content: "";
+    position: absolute;
+    width: 1400px;
+    height: 1400px;
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(110px);
+    opacity: 0.65;
+  }
+
+  /* Blob 1 */
+  .app-wrapper::before {
+    top: -600px;
+    left: -500px;
+    background: radial-gradient(circle at 40% 40%, #ece2ea 0%, #f9bbee 50%, transparent 70%);
+    animation: fastLiquidOne 12s ease-in-out infinite alternate;
+  }
+
+  /* Blob 2 */
+  .app-wrapper::after {
+    bottom: -600px;
+    right: -500px;
+    background: radial-gradient(circle at 60% 60%, #ece2ea 0%, #f9bbee 50%, transparent 70%);
+    animation: fastLiquidTwo 14s ease-in-out infinite alternate;
+  }
+
+  /* Blob 3 */
+  .blob-3 {
+    top: -400px;
+    right: -300px;
+    background: radial-gradient(circle at center, #eeddeb 0%, transparent 70%);
+    animation: fastLiquidThree 10s ease-in-out infinite alternate;
+  }
+
+  /* Blob 4 */
+  .blob-4 {
+    bottom: -400px;
+    left: -300px;
+    background: radial-gradient(circle at center, #dbb6d2 0%, transparent 70%);
+    animation: fastLiquidFour 18s ease-in-out infinite alternate;
+  }
+}
+
+/* GAME CONTAINER */
+
+.game-container {
+  width: min(520px, 92vw);
+  aspect-ratio: 13 / 17;
+  max-height: calc(100vh - 160px);
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow:
+    0 40px 80px rgba(0, 0, 0, 0.08),
+    0 20px 40px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+/* GAME INNER */
+
+.game-content {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  padding: 20px;
+}
+
+.title {
+  text-align: center;
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* LIQUID ANIMATIONS */
+
+@keyframes fastLiquidOne {
+  0%   { transform: translate(0, 0) rotate(0deg) scale(1); }
+  50%  { transform: translate(250px, 180px) rotate(25deg) scale(1.2); }
+  100% { transform: translate(-200px, -150px) rotate(-15deg) scale(0.9); }
+}
+
+@keyframes fastLiquidTwo {
+  0%   { transform: translate(0, 0) rotate(0deg) scale(1); }
+  50%  { transform: translate(-280px, -200px) rotate(-20deg) scale(1.15); }
+  100% { transform: translate(220px, 160px) rotate(20deg) scale(0.95); }
+}
+
+@keyframes fastLiquidThree {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(-200px, 150px) scale(1.1); }
+  100% { transform: translate(180px, -140px) scale(0.9); }
+}
+
+@keyframes fastLiquidFour {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(220px, -180px) scale(1.15); }
+  100% { transform: translate(-180px, 160px) scale(0.95); }
+}
+
+/* MOBILE MODE */
+
+@media (max-width: 500px) {
+
+  .app-wrapper {
+    background: #ffffff;
+    padding: 0;
+  }
+
+  .app-wrapper::before,
+  .app-wrapper::after,
+  .blob {
+    display: none;
+  }
+
+  .game-container {
+    width: 100%;
+    height: 100vh;
+    aspect-ratio: unset;
+    border-radius: 0;
+    box-shadow: none;
+    max-height: none;
+  }
 }
